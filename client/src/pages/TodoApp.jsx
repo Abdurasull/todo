@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import dotenv from "dotenv";
-dotenv.config();
 
 export default function TodoApp({ token, onLogout }) {
     const [todos, setTodos] = useState([]);
     const [text, setText] = useState("");
-    const base = `${process.env.REACT_APP_PORT}/api/todos`;
+    const base = `${import.meta.env.VITE_API_URL}/api/todos`;
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -39,7 +37,6 @@ export default function TodoApp({ token, onLogout }) {
         });
         
         const result = await res.json();
-        console.log(result.data);
         const newTodo = result.data;
         
         setTodos([newTodo, ...todos]);
@@ -61,7 +58,6 @@ export default function TodoApp({ token, onLogout }) {
 
         const result = await res.json();
         const updated = result.data;
-        console.log(updated);
         
         setTodos(todos.map((t) => (t._id === id ? updated : t)));
     };
