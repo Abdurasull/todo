@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function Login({ onLogin }) {
     const [form, setForm] = useState({ email: "", password: "" });
@@ -16,7 +18,7 @@ export default function Login({ onLogin }) {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:5000/api/auth/login", {
+            const res = await fetch(`${process.env.REACT_APP_PORT}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

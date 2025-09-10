@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function TodoApp({ token, onLogout }) {
     const [todos, setTodos] = useState([]);
     const [text, setText] = useState("");
-    const base = "http://localhost:5000/api/todos";
+    const base = `${process.env.REACT_APP_PORT}/api/todos`;
 
     useEffect(() => {
         const fetchTodos = async () => {
@@ -12,21 +14,16 @@ export default function TodoApp({ token, onLogout }) {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
-                console.log(res.ok);
-                
                 if (!res.ok) {
                     console.log(res.status, res.statusText);
                     return;
                 }
                 const data = await res.json();
-                console.log(data.data);
-                
                 setTodos(data.data);
             } catch (err) {
                 console.error("Error fetching todos:", err);
             }
         };
-
         fetchTodos();
     }, [token]);
 
