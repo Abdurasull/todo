@@ -23,8 +23,6 @@ export const userController = {
             return responseHandler({ status: 201, message: "User created successfully", data: null }, res);
 
         } catch (err) {
-            console.log(err);
-            
             errorHandler(err, res);
         }
     },

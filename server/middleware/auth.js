@@ -11,6 +11,9 @@ export default function auth(req, res, next) {
         
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
+        console.log(decoded, token);
+        
+        
         req.token = token;
         
         req.userId = decoded.id;
