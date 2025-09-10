@@ -9,7 +9,7 @@ import { todosRouter } from './routes/todos.js';
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "https://todoapp.vercel.app" }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL)
