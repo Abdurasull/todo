@@ -9,7 +9,8 @@ import { todosRouter } from './routes/todos.js';
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+// hammasi uchun ruxsat beramiz
+app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URL)
